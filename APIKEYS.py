@@ -4,17 +4,26 @@ from diy4youth_students.diy4youth_student_api import call_api
 client = oa(api_key='ONHD-1-sbdsf')
 
 diy4youth_student_api_key = "ONHD-1-sbdsf"
-
+previous_Questions = []
+previous_Answers = []
 def chat(prompt,system):
     system_content = system
 
     # set your question
-    question = prompt
-
+    export_string = ""
+    for i in range(len(previous_Questions)):
+        export_string += ("User: "+ previous_Questions[i]+" ")
+        export_string += ("ChatGPT:" + previous_Answers[i]+" ")
+    
+    question = export_string + prompt
+    previous_Questions.append(question)
+    print(export_string)
     # call diy4outh api to get answer 
     answer = call_api(diy4youth_student_api_key, question, system_content)
     if answer:
+        previous_Answers.append(answer)
         return answer
+
     else:
         return print("Failed to fetch data.")
 
@@ -41,8 +50,8 @@ demo = gr.Interface(
     
     outputs = gr.components.Markdown(),
     title = "Therapist"
-    
-)
+)    
+
 
 
 demo.launch(share = True)
