@@ -113,7 +113,76 @@ If the user demonstrates suicidal behavior, give them the suicide hotline'''
 #     outputs = gr.components.Markdown(),
 #     title = "Therapist"
 # )  
-with gr.Blocks() as demo:
+with gr.Blocks(css="""
+    body {
+        background-image: url('https://images.squarespace-cdn.com/content/v1/57b5ef68c534a5cc06edc769/1557345252933-X5WE96D3XZ2TVJH7OUS5/GettyImages-465355617.jpg?format=2500w');
+        background-size: cover;
+        color: white;
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+    .gradio-container {
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 10px;
+        padding: 20px;
+        margin: auto;
+        max-width: 800px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .gr-button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        width: 100%;
+        max-width: 200px;
+        margin: 20px auto;
+    }
+    .gr-button:hover {
+        background-color: #45a049;
+    }
+    .gr-markdown h1 {
+        color: #FFD700;
+        font-size: 3em;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .gr-markdown h2, .gr-markdown h3, .gr-markdown p {
+        color: #FFD700;
+    }
+    .gr-textbox input, .gr-textbox textarea {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 1px solid #fff;
+        border-radius: 5px;
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+    .gr-textbox input::placeholder, .gr-textbox textarea::placeholder {
+        color: #ddd;
+    }
+    .gr-textbox label {
+        color: white;
+    }
+    @media (max-width: 600px) {
+        .gradio-container {
+            width: 90%;
+            padding: 10px;
+        }
+        .gr-button {
+            padding: 8px 16px;
+        }
+        .gr-markdown h1 {
+            font-size: 2em;
+        }
+    }
+""") as demo:
     gr.Markdown(
         """
         # Welcome to the Mental Health Support Site
@@ -127,7 +196,7 @@ with gr.Blocks() as demo:
             user_input = gr.Textbox(label="Your Thoughts", placeholder="Type here...", lines=3)
             output = gr.Textbox(label="Supportive Message", placeholder="Your supportive message will appear here.", lines=5)
             button = gr.Button("Get Support")
-            button.click(chat, user_input, output)
+            button.click(chat, inputs=user_input, outputs=output)
         
         with gr.TabItem("Resources"):
             gr.Markdown(
@@ -148,8 +217,4 @@ with gr.Blocks() as demo:
                 """
             )
     
-    demo.launch(share=True)  
-
-
-
-demo.launch(share=True)
+    demo.launch(share=True)
