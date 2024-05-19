@@ -31,7 +31,7 @@ Highlights the user's strengths and progress.
 Cognitive Behavioral Techniques:
 
 Helps users identify and challenge negative thought patterns.
-Provides exercises and techniques for managing stress and anxiety.
+Provides exercises and techniques for managin    stress and anxiety.
 Mindfulness and Relaxation:
 
 Guides users through mindfulness exercises and relaxation techniques.
