@@ -17,7 +17,7 @@ def chat(prompt,system):
     
     question = export_string + prompt
     previous_Questions.append(question)
-    print(export_string)
+    #print(export_string)
     # call diy4outh api to get answer 
     answer = call_api(diy4youth_student_api_key, question, system_content)
     if answer:
@@ -45,8 +45,7 @@ def chat(prompt,system):
 
 demo = gr.Interface(
     fn=chat,
-    inputs = [gr.components.Textbox(label="Enter your question", placeholder="Type your question here..."),
-              gr.components.Textbox(label="Enter your system", placeholder="Type your question here...")],
+    inputs = [gr.components.Textbox(label="Enter your question", placeholder="Type your question here...")],
     
     outputs = gr.components.Markdown(),
     title = "Therapist"
